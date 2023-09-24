@@ -48,11 +48,10 @@ public class FoodController {
 
 		try {
 			foodServiceImpl.deleteFoodItem(id);
-			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationName("deleteFood");
 			operationStatusModel.setOperationResult("Success");
 		} catch (Exception e) {
-			// Handle the case where the ID is not found
-			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationName("deleteFood");
 			operationStatusModel.setOperationResult("Failure");
 		}
 
