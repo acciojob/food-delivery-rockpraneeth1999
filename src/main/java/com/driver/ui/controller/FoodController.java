@@ -53,7 +53,7 @@ public class FoodController {
 		} catch (Exception e) {
 			// Handle the case where the ID is not found
 			operationStatusModel.setOperationName("Delete");
-			operationStatusModel.setOperationResult("Failure: " + e.getMessage());
+			operationStatusModel.setOperationResult("Failure");
 		}
 
 		return operationStatusModel;
