@@ -44,10 +44,18 @@ public class FoodController {
 
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteFood(@PathVariable String id) throws Exception{
-		foodServiceImpl.deleteFoodItem(id);
 		OperationStatusModel operationStatusModel = new OperationStatusModel();
-		operationStatusModel.setOperationName("Delete");
-		operationStatusModel.setOperationResult("Success");
+
+		try {
+			foodServiceImpl.deleteFoodItem(id);
+			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationResult("Success");
+		} catch (Exception e) {
+			// Handle the case where the ID is not found
+			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationResult("Failure: " + e.getMessage());
+		}
+
 		return operationStatusModel;
 	}
 	
