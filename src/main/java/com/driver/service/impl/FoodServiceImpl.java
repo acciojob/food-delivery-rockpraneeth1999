@@ -53,7 +53,7 @@ public class FoodServiceImpl implements FoodService {
     public void deleteFoodItem(String id) throws Exception {
         FoodEntity foodEntity = foodRepository.findByFoodId(id);
         if (foodEntity == null) {
-            throw new Exception("Invalid food id");
+            throw new Exception();
         }
         foodRepository.delete(foodEntity);
     }

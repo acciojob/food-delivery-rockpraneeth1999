@@ -56,18 +56,19 @@ public class FoodController {
 
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteFood(@PathVariable String id) throws Exception{
-		OperationStatusModel operationStatusModel = new OperationStatusModel();
-
 		try {
 			foodServiceImpl.deleteFoodItem(id);
+			OperationStatusModel operationStatusModel = new OperationStatusModel();
 			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.toString());
+			return operationStatusModel;
+
 		} catch (Exception e) {
+			OperationStatusModel operationStatusModel = new OperationStatusModel();
 			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.toString());
+			return operationStatusModel;
 		}
-
-		return operationStatusModel;
 	}
 	
 	@GetMapping()
