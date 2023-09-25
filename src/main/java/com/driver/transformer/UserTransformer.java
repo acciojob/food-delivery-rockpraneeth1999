@@ -41,6 +41,7 @@ public class UserTransformer {
 
     public static UserDto UserEntityToUserDto(UserEntity userEntity){
         UserDto userDto = new UserDto();
+        userDto.setId(userEntity.getId());
         userDto.setUserId(userEntity.getUserId());
         userDto.setFirstName(userEntity.getFirstName());
         userDto.setLastName(userEntity.getLastName());
