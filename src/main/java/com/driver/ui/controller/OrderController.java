@@ -3,6 +3,8 @@ package com.driver.ui.controller;
 import com.driver.model.request.OrderDetailsRequestModel;
 import com.driver.model.response.OperationStatusModel;
 import com.driver.model.response.OrderDetailsResponse;
+import com.driver.model.response.RequestOperationName;
+import com.driver.model.response.RequestOperationStatus;
 import com.driver.service.impl.OrderServiceImpl;
 import com.driver.shared.dto.OrderDto;
 import com.driver.transformer.OrderTransformer;
@@ -57,14 +59,14 @@ public class OrderController {
 	public OperationStatusModel deleteOrder(@PathVariable String id) throws Exception {
 		OperationStatusModel operationStatusModel = new OperationStatusModel();
 		try {
-			operationStatusModel.setOperationResult("Success");
-			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.toString());
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			orderServiceImpl.deleteOrder(id);
 			return operationStatusModel;
 		}
 		catch (Exception exception){
-			operationStatusModel.setOperationResult("Failure");
-			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.toString());
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			return operationStatusModel;
 		}
 	}

@@ -2,6 +2,8 @@ package com.driver.ui.controller;
 
 import com.driver.model.request.UserDetailsRequestModel;
 import com.driver.model.response.OperationStatusModel;
+import com.driver.model.response.RequestOperationName;
+import com.driver.model.response.RequestOperationStatus;
 import com.driver.model.response.UserResponse;
 import com.driver.service.impl.UserServiceImpl;
 import com.driver.shared.dto.UserDto;
@@ -63,13 +65,13 @@ public class UserController {
 		OperationStatusModel operationStatusModel = new OperationStatusModel();
 		try {
 			userServiceImpl.deleteUser(id);
-			operationStatusModel.setOperationResult("Success");
-			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.toString());
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			return operationStatusModel;
 		}
 		catch (Exception exception){
-			operationStatusModel.setOperationResult("Failure");
-			operationStatusModel.setOperationName("Delete");
+			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.toString());
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			return operationStatusModel;
 		}
 	}

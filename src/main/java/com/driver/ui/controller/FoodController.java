@@ -3,6 +3,8 @@ package com.driver.ui.controller;
 import com.driver.model.request.FoodDetailsRequestModel;
 import com.driver.model.response.FoodDetailsResponse;
 import com.driver.model.response.OperationStatusModel;
+import com.driver.model.response.RequestOperationName;
+import com.driver.model.response.RequestOperationStatus;
 import com.driver.service.impl.FoodServiceImpl;
 import com.driver.shared.dto.FoodDto;
 import com.driver.transformer.FoodTransformer;
@@ -58,11 +60,11 @@ public class FoodController {
 
 		try {
 			foodServiceImpl.deleteFoodItem(id);
-			operationStatusModel.setOperationName("Delete");
-			operationStatusModel.setOperationResult("Success");
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
+			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.toString());
 		} catch (Exception e) {
-			operationStatusModel.setOperationName("Delete");
-			operationStatusModel.setOperationResult("Failure");
+			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
+			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.toString());
 		}
 
 		return operationStatusModel;
