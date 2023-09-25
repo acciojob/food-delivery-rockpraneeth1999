@@ -29,14 +29,17 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto getOrderById(String orderId) throws Exception {
         OrderEntity orderEntity = orderRepository.findByOrderId(orderId);
+        if(orderEntity==null)
+            throw new Exception("Invalid orderId");
         OrderDto orderDto = OrderTransformer.OrderEntityToOrderDto(orderEntity);
-
         return orderDto;
     }
 
     @Override
     public OrderDto updateOrderDetails(String orderId, OrderDto order) throws Exception {
         OrderEntity orderEntity = orderRepository.findByOrderId(orderId);
+        if(orderEntity==null)
+            throw new Exception("Invalid orderId");
         orderEntity.setOrderId(order.getOrderId());
         orderEntity.setCost(order.getCost());
 

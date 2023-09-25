@@ -30,29 +30,43 @@ public class OrderController {
 
 	@GetMapping(path="/{id}")
 	public OrderDetailsResponse getOrder(@PathVariable String id) throws Exception{
-		OrderDto orderDto = orderServiceImpl.getOrderById(id);
-		OrderDetailsResponse orderDetailsResponse = OrderTransformer.OrderDtoToOrderDetailsResponse(orderDto);
-
-		return orderDetailsResponse;
+		try {
+			OrderDto orderDto = orderServiceImpl.getOrderById(id);
+			OrderDetailsResponse orderDetailsResponse = OrderTransformer.OrderDtoToOrderDetailsResponse(orderDto);
+			return orderDetailsResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
 	}
 		
 	@PutMapping(path="/{id}")
 	public OrderDetailsResponse updateOrder(@PathVariable String id, @RequestBody OrderDetailsRequestModel order) throws Exception{
-		OrderDto orderDto = OrderTransformer.OrderDetailsRequestModelToOrderDto(order);
-		orderDto = orderServiceImpl.updateOrderDetails(id,orderDto);
-		OrderDetailsResponse orderDetailsResponse = OrderTransformer.OrderDtoToOrderDetailsResponse(orderDto);
-
-		return orderDetailsResponse;
+		try {
+			OrderDto orderDto = OrderTransformer.OrderDetailsRequestModelToOrderDto(order);
+			orderDto = orderServiceImpl.updateOrderDetails(id,orderDto);
+			OrderDetailsResponse orderDetailsResponse = OrderTransformer.OrderDtoToOrderDetailsResponse(orderDto);
+			return orderDetailsResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
 	}
 	
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteOrder(@PathVariable String id) throws Exception {
 		OperationStatusModel operationStatusModel = new OperationStatusModel();
-		operationStatusModel.setOperationResult("Success");
-		operationStatusModel.setOperationName("Delete");
-		orderServiceImpl.deleteOrder(id);
-
-		return operationStatusModel;
+		try {
+			operationStatusModel.setOperationResult("Success");
+			operationStatusModel.setOperationName("Delete");
+			orderServiceImpl.deleteOrder(id);
+			return operationStatusModel;
+		}
+		catch (Exception exception){
+			operationStatusModel.setOperationResult("Failure");
+			operationStatusModel.setOperationName("Delete");
+			return operationStatusModel;
+		}
 	}
 	
 	@GetMapping()

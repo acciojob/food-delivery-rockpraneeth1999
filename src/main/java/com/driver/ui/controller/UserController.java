@@ -19,36 +19,59 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userServiceImpl;
 
-	@GetMapping(path = "/{id}")
-	public UserResponse getUser(@PathVariable String id) throws Exception{
-		UserDto userDto = userServiceImpl.getUser(id);
-		UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
-		return userResponse;
-	}
-
 	@PostMapping()
 	public UserResponse createUser(@RequestBody UserDetailsRequestModel userDetails) throws Exception{
 		UserDto userDto = UserTransformer.UserDetailsRequestModelToUserDto(userDetails);
-		userDto = userServiceImpl.createUser(userDto);
-		UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
-		return userResponse;
+		try {
+			userDto = userServiceImpl.createUser(userDto);
+			UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
+			return userResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
+	}
+
+
+	@GetMapping(path = "/{id}")
+	public UserResponse getUser(@PathVariable String id) throws Exception{
+		try {
+			UserDto userDto = userServiceImpl.getUserByUserId(id);
+			UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
+			return userResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
 	}
 
 	@PutMapping(path = "/{id}")
 	public UserResponse updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) throws Exception{
-		UserDto userDto = UserTransformer.UserDetailsRequestModelToUserDto(userDetails);
-		userDto=userServiceImpl.updateUser(id,userDto);
-		UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
-		return userResponse;
+		try {
+			UserDto userDto = UserTransformer.UserDetailsRequestModelToUserDto(userDetails);
+			userDto=userServiceImpl.updateUser(id,userDto);
+			UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
+			return userResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
 	}
 
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteUser(@PathVariable String id) throws Exception{
-		userServiceImpl.deleteUser(id);
 		OperationStatusModel operationStatusModel = new OperationStatusModel();
-		operationStatusModel.setOperationResult("Success");
-		operationStatusModel.setOperationName("Delete");
-		return operationStatusModel;
+		try {
+			userServiceImpl.deleteUser(id);
+			operationStatusModel.setOperationResult("Success");
+			operationStatusModel.setOperationName("Delete");
+			return operationStatusModel;
+		}
+		catch (Exception exception){
+			operationStatusModel.setOperationResult("Failure");
+			operationStatusModel.setOperationName("Delete");
+			return operationStatusModel;
+		}
 	}
 	
 	@GetMapping()

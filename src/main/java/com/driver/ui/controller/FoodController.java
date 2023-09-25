@@ -19,13 +19,6 @@ public class FoodController {
 	@Autowired
 	FoodServiceImpl foodServiceImpl;
 
-	@GetMapping(path="/{id}")
-	public FoodDetailsResponse getFood(@PathVariable String id) throws Exception{
-		FoodDto foodDto = foodServiceImpl.getFoodById(id);
-		FoodDetailsResponse foodDetailsResponse = FoodTransformer.FoodDtoToFoodDetailsResponse(foodDto);
-		return foodDetailsResponse;
-	}
-
 	@PostMapping("/create")
 	public FoodDetailsResponse createFood(@RequestBody FoodDetailsRequestModel foodDetails) {
 		FoodDto foodDto = FoodTransformer.CreateFoodDtoFromFoodDetailsRequestModel(foodDetails);
@@ -34,12 +27,29 @@ public class FoodController {
 		return foodDetailsResponse;
 	}
 
+	@GetMapping(path="/{id}")
+	public FoodDetailsResponse getFood(@PathVariable String id) throws Exception{
+		try {
+			FoodDto foodDto = foodServiceImpl.getFoodById(id);
+			FoodDetailsResponse foodDetailsResponse = FoodTransformer.FoodDtoToFoodDetailsResponse(foodDto);
+			return foodDetailsResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
+	}
+
 	@PutMapping(path="/{id}")
 	public FoodDetailsResponse updateFood(@PathVariable String id, @RequestBody FoodDetailsRequestModel foodDetails) throws Exception{
-		FoodDto foodDto = FoodTransformer.CreateFoodDtoFromFoodDetailsRequestModel(foodDetails);
-		foodDto = foodServiceImpl.updateFoodDetails(id,foodDto);
-		FoodDetailsResponse foodDetailsResponse = FoodTransformer.FoodDtoToFoodDetailsResponse(foodDto);
-		return foodDetailsResponse;
+		try {
+			FoodDto foodDto = FoodTransformer.CreateFoodDtoFromFoodDetailsRequestModel(foodDetails);
+			foodDto = foodServiceImpl.updateFoodDetails(id,foodDto);
+			FoodDetailsResponse foodDetailsResponse = FoodTransformer.FoodDtoToFoodDetailsResponse(foodDto);
+			return foodDetailsResponse;
+		}
+		catch (Exception exception){
+			return null;
+		}
 	}
 
 	@DeleteMapping(path = "/{id}")
@@ -48,10 +58,10 @@ public class FoodController {
 
 		try {
 			foodServiceImpl.deleteFoodItem(id);
-			operationStatusModel.setOperationName("deleteFood");
+			operationStatusModel.setOperationName("Delete");
 			operationStatusModel.setOperationResult("Success");
 		} catch (Exception e) {
-			operationStatusModel.setOperationName("deleteFood");
+			operationStatusModel.setOperationName("Delete");
 			operationStatusModel.setOperationResult("Failure");
 		}
 

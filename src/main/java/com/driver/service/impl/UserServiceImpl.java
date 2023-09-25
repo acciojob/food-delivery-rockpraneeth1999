@@ -26,6 +26,10 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto user) throws Exception {
         UserEntity userEntity = UserTransformer.UserDtoToUserEntity(user);
         userEntity=userRepository.save(userEntity);
+
+        if(userEntity==null)
+            throw new Exception("Unable to add User");
+
         UserDto userDto = UserTransformer.UserEntityToUserDto(userEntity);
         return userDto;
     }
