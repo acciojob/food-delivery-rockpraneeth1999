@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String userId) throws Exception {
         UserEntity userEntity = userRepository.findByUserId(userId);
         if (userEntity==null)
-            throw new Exception("Invalid user id");
+            throw new Exception();
 
         userRepository.delete(userEntity);
     }

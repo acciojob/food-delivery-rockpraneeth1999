@@ -62,14 +62,15 @@ public class UserController {
 
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteUser(@PathVariable String id) throws Exception{
-		OperationStatusModel operationStatusModel = new OperationStatusModel();
 		try {
 			userServiceImpl.deleteUser(id);
+			OperationStatusModel operationStatusModel = new OperationStatusModel();
 			operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.toString());
 			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			return operationStatusModel;
 		}
 		catch (Exception exception){
+			OperationStatusModel operationStatusModel = new OperationStatusModel();
 			operationStatusModel.setOperationResult(RequestOperationStatus.ERROR.toString());
 			operationStatusModel.setOperationName(RequestOperationName.DELETE.toString());
 			return operationStatusModel;
