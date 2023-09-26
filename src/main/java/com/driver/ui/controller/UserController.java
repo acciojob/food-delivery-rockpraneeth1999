@@ -56,7 +56,7 @@ public class UserController {
 			return userResponse;
 		}
 		catch (Exception exception){
-			return null;
+			return new UserResponse();
 		}
 	}
 
