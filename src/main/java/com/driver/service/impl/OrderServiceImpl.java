@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -19,6 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto createOrder(OrderDto order) {
+        order.setOrderId(UUID.randomUUID().toString());
         OrderEntity orderEntity = OrderTransformer.OrderDtoToOrderEntity(order);
         orderEntity = orderRepository.save(orderEntity);
         OrderDto orderDto = OrderTransformer.OrderEntityToOrderDto(orderEntity);
@@ -30,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto getOrderById(String orderId) throws Exception {
         OrderEntity orderEntity = orderRepository.findByOrderId(orderId);
         if(orderEntity==null)
-            throw new Exception("Invalid orderId");
+            throw new Exception();
         OrderDto orderDto = OrderTransformer.OrderEntityToOrderDto(orderEntity);
         return orderDto;
     }
@@ -39,19 +41,16 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto updateOrderDetails(String orderId, OrderDto order) throws Exception {
         OrderEntity orderEntity = orderRepository.findByOrderId(orderId);
         if(orderEntity==null)
-            throw new Exception("Invalid orderId");
-        orderEntity.setOrderId(order.getOrderId());
-        orderEntity.setCost(order.getCost());
+            throw new Exception();
 
 //        String[] orderItems = order.getItems();
 //        String[] items = new String[orderItems.length];
 //        for(int i=0;i<orderItems.length;i++){
 //            items[i]=orderItems[i];
 //        }
-
+        orderEntity.setCost(order.getCost());
         orderEntity.setItems(order.getItems());
         orderEntity.setUserId(order.getUserId());
-        orderEntity.setStatus(order.isStatus());
 
         orderEntity = orderRepository.save(orderEntity);
 

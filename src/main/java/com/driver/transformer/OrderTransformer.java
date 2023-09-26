@@ -5,12 +5,10 @@ import com.driver.model.request.OrderDetailsRequestModel;
 import com.driver.model.response.OrderDetailsResponse;
 import com.driver.shared.dto.OrderDto;
 
-import java.util.UUID;
-
 public class OrderTransformer {
     public static OrderDto OrderDetailsRequestModelToOrderDto(OrderDetailsRequestModel orderDetailsRequestModel) {
         OrderDto orderDto = new OrderDto();
-        orderDto.setOrderId(UUID.randomUUID().toString());
+//        orderDto.setOrderId(UUID.randomUUID().toString());
         orderDto.setCost(orderDetailsRequestModel.getCost());
 
 //        String[] orderRequestDetailsModelItems = orderDetailsRequestModel.getItems();
@@ -23,7 +21,7 @@ public class OrderTransformer {
 
         orderDto.setItems(orderDetailsRequestModel.getItems());
         orderDto.setUserId(orderDetailsRequestModel.getUserId());
-        orderDto.setStatus(false);
+        orderDto.setStatus(true);
 
         return orderDto;
     }
