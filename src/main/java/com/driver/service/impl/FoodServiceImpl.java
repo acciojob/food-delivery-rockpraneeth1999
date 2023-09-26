@@ -28,7 +28,7 @@ public class FoodServiceImpl implements FoodService {
     public FoodDto getFoodById(String foodId) throws Exception {
         FoodEntity foodEntity = foodRepository.findByFoodId(foodId);
         if(foodEntity==null)
-            throw new Exception("Invalid food id");
+            throw new Exception();
 
         FoodDto foodDto = FoodTransformer.FoodEntityToFoodDto(foodEntity);
         return foodDto;
@@ -38,7 +38,7 @@ public class FoodServiceImpl implements FoodService {
     public FoodDto updateFoodDetails(String foodId, FoodDto foodDetails) throws Exception {
         FoodEntity foodEntity = foodRepository.findByFoodId(foodId);
         if (foodEntity==null)
-            throw new Exception("Invalid food id");
+            throw new Exception();
 
         foodEntity.setFoodName(foodDetails.getFoodName());
         foodEntity.setFoodCategory(foodDetails.getFoodCategory());

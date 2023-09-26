@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         userEntity=userRepository.save(userEntity);
 
         if(userEntity==null)
-            throw new Exception("Unable to add User");
+            throw new Exception();
 
         UserDto userDto = UserTransformer.UserEntityToUserDto(userEntity);
         return userDto;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserByUserId(String userId) throws Exception {
         UserEntity userEntity = userRepository.findByUserId(userId);
         if (userEntity==null)
-            throw new Exception("Invalid user id");
+            throw new Exception();
         UserDto userDto=UserTransformer.UserEntityToUserDto(userEntity);
         return userDto;
     }
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(String userId, UserDto user) throws Exception {
         UserEntity userEntity = userRepository.findByUserId(userId);
         if (userEntity==null)
-            throw new Exception("Invalid user id");
+            throw new Exception();
 
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());

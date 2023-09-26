@@ -49,15 +49,20 @@ public class UserController {
 
 	@PutMapping(path = "/{id}")
 	public UserResponse updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) throws Exception{
-		try {
-			UserDto userDto = UserTransformer.UserDetailsRequestModelToUserDto(userDetails);
+//		try {
+//			UserDto userDto = UserTransformer.UserDetailsRequestModelToUserDto(userDetails);
+//			userDto=userServiceImpl.updateUser(id,userDto);
+//			UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
+//			return userResponse;
+//		}
+//		catch (Exception exception){
+//			return null;
+//		}
+		UserDto userDto = UserTransformer.UserDetailsRequestModelToUserDto(userDetails);
 			userDto=userServiceImpl.updateUser(id,userDto);
 			UserResponse userResponse = UserTransformer.UserDtoToUserResponse(userDto);
 			return userResponse;
-		}
-		catch (Exception exception){
-			return null;
-		}
+
 	}
 
 	@DeleteMapping(path = "/{id}")
