@@ -43,7 +43,7 @@ public class UserController {
 			return userResponse;
 		}
 		catch (Exception exception){
-			return null;
+			return new UserResponse();
 		}
 	}
 
@@ -56,7 +56,7 @@ public class UserController {
 			return userResponse;
 		}
 		catch (Exception exception){
-			return new UserResponse();
+			return null;
 		}
 	}
 
