@@ -13,13 +13,15 @@ public class OrderTransformer {
         orderDto.setOrderId(UUID.randomUUID().toString());
         orderDto.setCost(orderDetailsRequestModel.getCost());
 
-        String[] orderRequestDetailsModelItems = orderDetailsRequestModel.getItems();
-        String[] items = new String[orderRequestDetailsModelItems.length];
-        for(int i=0;i<orderRequestDetailsModelItems.length;i++){
-            items[i]=orderRequestDetailsModelItems[i];
-        }
+//        String[] orderRequestDetailsModelItems = orderDetailsRequestModel.getItems();
+//        String[] items = new String[orderRequestDetailsModelItems.length];
+//        for(int i=0;i<orderRequestDetailsModelItems.length;i++){
+//            items[i]=orderRequestDetailsModelItems[i];
+//        }
 
-        orderDto.setItems(items);
+        //orderDto.setItems(items);
+
+        orderDto.setItems(orderDetailsRequestModel.getItems());
         orderDto.setUserId(orderDetailsRequestModel.getUserId());
         orderDto.setStatus(false);
 
@@ -31,12 +33,13 @@ public class OrderTransformer {
         orderDetailsResponse.setOrderId(orderDto.getOrderId());
         orderDetailsResponse.setCost(orderDto.getCost());
 
-        String[] orderDtoItems = orderDetailsResponse.getItems();
-        String[] items = new String[orderDtoItems.length];
-        for(int i=0;i<orderDtoItems.length;i++){
-            items[i]=orderDtoItems[i];
-        }
+//        String[] orderDtoItems = orderDetailsResponse.getItems();
+//        String[] items = new String[orderDtoItems.length];
+//        for(int i=0;i<orderDtoItems.length;i++){
+//            items[i]=orderDtoItems[i];
+//        }
 
+        orderDetailsResponse.setItems(orderDto.getItems());
         orderDetailsResponse.setUserId(orderDto.getUserId());
         orderDetailsResponse.setStatus(orderDto.isStatus());
 
@@ -48,13 +51,15 @@ public class OrderTransformer {
         orderEntity.setOrderId(orderDto.getOrderId());
         orderEntity.setCost(orderDto.getCost());
 
-        String[] orderDtoItems = orderDto.getItems();
-        String[] items = new String[orderDtoItems.length];
-        for(int i=0;i<orderDtoItems.length;i++){
-            items[i]=orderDtoItems[i];
-        }
+//        String[] orderDtoItems = orderDto.getItems();
+//        String[] items = new String[orderDtoItems.length];
+//        for(int i=0;i<orderDtoItems.length;i++){
+//            items[i]=orderDtoItems[i];
+//        }
+//
+//        orderEntity.setItems(items);
 
-        orderEntity.setItems(items);
+        orderEntity.setItems(orderDto.getItems());
         orderEntity.setUserId(orderDto.getUserId());
         orderEntity.setStatus(orderDto.isStatus());
 
@@ -67,13 +72,15 @@ public class OrderTransformer {
         orderDto.setOrderId(orderEntity.getOrderId());
         orderDto.setCost(orderEntity.getCost());
 
-        String[] orderEntityItems = orderEntity.getItems();
-        String[] items = new String[orderEntityItems.length];
-        for(int i=0;i<orderEntityItems.length;i++){
-            items[i]=orderEntityItems[i];
-        }
+//        String[] orderEntityItems = orderEntity.getItems();
+//        String[] items = new String[orderEntityItems.length];
+//        for(int i=0;i<orderEntityItems.length;i++){
+//            items[i]=orderEntityItems[i];
+//        }
+//
+//        orderDto.setItems(items);
 
-        orderDto.setItems(items);
+        orderDto.setItems(orderEntity.getItems());
         orderDto.setUserId(orderEntity.getUserId());
         orderDto.setStatus(orderEntity.isStatus());
 

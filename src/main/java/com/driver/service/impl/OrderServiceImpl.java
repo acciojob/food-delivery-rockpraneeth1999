@@ -43,13 +43,13 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.setOrderId(order.getOrderId());
         orderEntity.setCost(order.getCost());
 
-        String[] orderItems = order.getItems();
-        String[] items = new String[orderItems.length];
-        for(int i=0;i<orderItems.length;i++){
-            items[i]=orderItems[i];
-        }
+//        String[] orderItems = order.getItems();
+//        String[] items = new String[orderItems.length];
+//        for(int i=0;i<orderItems.length;i++){
+//            items[i]=orderItems[i];
+//        }
 
-        orderEntity.setItems(items);
+        orderEntity.setItems(order.getItems());
         orderEntity.setUserId(order.getUserId());
         orderEntity.setStatus(order.isStatus());
 
